@@ -418,7 +418,7 @@ def fetch_agent_config_from_template(agent_template_id: int,
 
 
 @router.post("/publish_template/agent_execution_id/{agent_execution_id}", status_code=201)
-def publish_template(agent_execution_id: str, organisation=Depends(get_user_organisation), user=Depends(get_current_user)):
+def publish_template(agent_execution_id: str, organisation=Depends(get_user_organisation)):
 
     """
     Publish an agent execution as a template.
@@ -479,14 +479,13 @@ def publish_template(agent_execution_id: str, organisation=Depends(get_user_orga
     return agent_template.to_dict()
 
 @router.post("/publish_template", status_code=201)
-def handle_publish_template(updated_details: AgentPublish, organisation=Depends(get_user_organisation), user=Depends(get_current_user)):
+def handle_publish_template(updated_details: AgentPublish, organisation=Depends(get_user_organisation)):
     
     """
     Publish a template from edit template page.
 
     Args:
         organisation (Depends): Dependency to get the user organisation.
-        user (Depends): Dependency to get the user.
 
     Returns:
         dict: The saved agent template.
